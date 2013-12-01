@@ -15,9 +15,9 @@
         </ul>
 
         <!-- Search menu -->
-        <form class="navbar-form navbar-left" role="search" method="POST" action="">
+        <form class="navbar-form navbar-left" role="search" method="POST" action="search.php">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Rechercher terme">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Rechercher terme">
             </div><span></span><!--Bug si on enleve le span ???-->
             <button type="submit" class="btn btn-default">Chercher</button>
         </form>
@@ -33,7 +33,7 @@
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">Se connecter <b class="caret"></b></a>
                 <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
                     <span class="arrow"></span>
-                    <form action="#" method="post" accept-charset="UTF-8">
+                    <form action="?logged=true" method="post" accept-charset="UTF-8">
                         <input id="user_email" style="margin-bottom: 15px;" type="text" name="user[email]" size="30" placeholder="Adresse email"/>
                         <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" placeholder="Mot de passe"/>
                         <input class="btn btn-default" style="clear: left; width: 100%; height: 32px; font-size: 13px; margin-bottom: 15px;" type="submit" name="commit" value="Connexion" />
@@ -48,6 +48,7 @@
         ?>
         <!-- When your logged -->
         <ul class="nav navbar-nav navbar-right">
+	    <li><a href="account.php">Mon compte</a></li>
             <li><a href="logout.php">Se déconnecter</a></li>
         </ul>
         <p class="navbar-text navbar-right">Connecté en tant que Rémy Peru</p>
