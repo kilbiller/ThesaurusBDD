@@ -1,70 +1,51 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta viewport="width=device-width, initial-scale=1.0">
-    <title>Thésaurus nouvelles technologies</title>
-    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheets/theme.css">
-</head>
-<body>
+<?php
+    require_once 'loader.php';
 
-    <?php include 'header.php'; ?>
+    if (isset($_GET['logged']))
+        $logged = true;
+    else
+        $logged = false;
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10">
-                <div class="page-header">
-                    <h1>Liste des termes</h1>
-                </div>
 
-                <div class="panel panel-default">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading concept"><i class="glyphicon glyphicon-chevron-right"></i> Concept <span class="badge">42</span></div>
-                    <!-- List group -->
-                    <ul class="list-group terme">
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                    </ul>
-                </div>
+    class Concept {
+        public $termes = array();
+        public $nom;
+        public $link;
 
-                <div class="panel panel-default">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading concept"><i class="glyphicon glyphicon-chevron-right"></i> Concept <span class="badge">42</span></div>
-                    <!-- List group -->
-                    <ul class="list-group terme">
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                    </ul>
-                </div>
+        function Concept($nom, $link) {
+            $this->nom = $nom;
+            $this->link = $link;
+        }
 
-                <div class="panel panel-default">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading concept"><i class="glyphicon glyphicon-chevron-right"></i> Concept <span class="badge">42</span></div>
-                    <!-- List group -->
-                    <ul class="list-group terme">
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                        <li class="list-group-item">Terme</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div><!-- /.container -->
+        function AddTerme($terme) {
+            $this->termes[] = $terme;
+        }
+    }
 
-    <!-- JAVASCRIPTS -->
-    <script src="javascripts/jquery-2.0.3.min.js"></script>
-    <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/script.js"></script>
-    <!-- /JAVASCRIPTS -->
+    class Terme {
+        public $nom;
+        public $link;
 
-</body>
-</html>
+        function Terme($nom, $link) {
+            $this->nom = $nom;
+            $this->link = $link;
+        }
+    }
+
+    $concepts = array();
+
+    $concepts[] = new Concept("Concept1","linkconcept1");
+        $concepts[0]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[0]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[0]->AddTerme(new Terme("Terme3","linkterme3"));
+    $concepts[] = new Concept("Concept2","linkconcept2");
+        $concepts[1]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[1]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[1]->AddTerme(new Terme("Terme3","linkterme3"));
+    $concepts[] = new Concept("Concept3","linkconcept3");
+        $concepts[2]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
+
+    echo $twig->render('index.twig', array('logged' => $logged, 'concepts' => $concepts));
+?>
