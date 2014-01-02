@@ -34,10 +34,10 @@
 
     $concepts = array();
 
-    $concepts[] = new Concept("Concept1","linkconcept1");
-        $concepts[0]->AddTerme(new Terme("Terme1","linkterme1"));
-        $concepts[0]->AddTerme(new Terme("Terme2","linkterme2"));
-        $concepts[0]->AddTerme(new Terme("Terme3","linkterme3"));
+    $concepts[] = new Concept("Concept / Descripteur Vedette","linkconcept1");
+        $concepts[0]->AddTerme(new Terme("Synonyme 1","linkterme1"));
+        $concepts[0]->AddTerme(new Terme("Synonyme 2","linkterme2"));
+        $concepts[0]->AddTerme(new Terme("Synonyme 3","linkterme3"));
     $concepts[] = new Concept("Concept2","linkconcept2");
         $concepts[1]->AddTerme(new Terme("Terme1","linkterme1"));
         $concepts[1]->AddTerme(new Terme("Terme2","linkterme2"));

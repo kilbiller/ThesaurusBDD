@@ -1,0 +1,28 @@
+{% extends "layout.twig" %}
+
+{% block title %}Terme{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="page-header">
+                    <h1>Nom du terme</h1>
+                </div>
+
+                <h2>Définition : </h2>
+                <h3>Est généralisé le descripteur suivant : </h3>
+                <h3>Est spécialisé par les descripteurs suivants : </h3>
+                <h3>Liste de descripteurs synonymes : </h3>
+
+                {% for t in test %}
+                    {{t.EMAIL}}
+                {% endfor %}
+
+                {{dump(test)}}
+
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
