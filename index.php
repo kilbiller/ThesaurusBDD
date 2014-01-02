@@ -1,12 +1,6 @@
 <?php
     require_once 'loader.php';
 
-    if (isset($_GET['logged']))
-        $logged = true;
-    else
-        $logged = false;
-
-
     class Concept {
         public $termes = array();
         public $nom;
@@ -47,5 +41,5 @@
         $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
         $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
 
-    echo $twig->render('index.twig', array('logged' => $logged, 'concepts' => $concepts));
+    echo $twig->render('index.twig', array('concepts' => $concepts));
 ?>

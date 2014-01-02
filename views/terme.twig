@@ -20,6 +20,12 @@
 
                 {{dump(test)}}
 
+                {{ app.request.query.get("lol") }}
+                {{ GET["lol"] }}
+                {% if GET['lol'] is defined %}
+                    {{ GET["lol"] }}
+                {% endif %}
+
 
 
             </div>
