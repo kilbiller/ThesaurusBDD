@@ -40,6 +40,27 @@
         $concepts[2]->AddTerme(new Terme("Terme1","linkterme1"));
         $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
         $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
+        $concepts[2]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
+        $concepts[2]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
+        $concepts[2]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
+        $concepts[2]->AddTerme(new Terme("Terme1","linkterme1"));
+        $concepts[2]->AddTerme(new Terme("Terme2","linkterme2"));
+        $concepts[2]->AddTerme(new Terme("Terme3","linkterme3"));
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
+    $concepts[] = new Concept("Concept3","linkconcept3");
 
-    echo $twig->render('index.twig', array('concepts' => $concepts));
+    echo $twig->render('index.twig', array('page' => 'index', 'concepts' => $concepts));
 ?>

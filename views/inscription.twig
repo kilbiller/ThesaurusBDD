@@ -9,7 +9,7 @@
                     <h1>Inscription</h1>
                 </div>
                 {% if SESSION['email'] is defined %}
-                    <h2>Vous êtes déja connecté.</h2>
+                    <div class="alert alert-danger">Vous êtes déja inscrit et connecté.</div>
                 {% else %}
                     {% if error is not null %}
                         <div class="alert alert-danger">{{ error }}</div>
