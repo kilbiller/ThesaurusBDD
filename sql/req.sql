@@ -12,8 +12,8 @@ INSERT INTO descripteurVedette VALUES('Cloud computing',CURRENT_TIMESTAMP,0,'Inf
     NULL,NULL);
 
 UPDATE descripteurVedette
-   SET specialisations = specialList((SELECT ref(d) FROM descripteurVedette d WHERE d.libelle = 'Cloud computing'))
- WHERE libelle = 'Internet';
+SET specialisations = specialList((SELECT ref(d) FROM descripteurVedette d WHERE d.libelle = 'Cloud computing'))
+WHERE libelle = 'Internet';
 
 INSERT INTO TABLE(SELECT specialisations FROM descripteurVedette WHERE libelle = 'Internet')
 VALUES ((SELECT ref(d) FROM descripteurVedette d WHERE d.libelle = 'Cloud computing'));

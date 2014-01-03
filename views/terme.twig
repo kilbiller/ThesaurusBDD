@@ -8,34 +8,33 @@
                 {% if terme != false %}
                     <div class="page-header">
                         <h1>{{terme.LIBELLE}}</h1>
+                        {% if SESSION['email'] is defined %}
+                        <a href="terme_modif.php?terme={{ terme.LIBELLE }}">
+                            <i class="glyphicon glyphicon-wrench"></i> Modifier
+                        </a>
+                        {% endif %}
                     </div>
 
-                    <h2>Définition :</h2>
+                    <h2>Définition</h2>
                         {{terme.DEFINITION}}
                     {% if terme.GEN_LIBELLE != null %}
-                        <h3>Est généralisé le descripteur suivant :</h3>
+                        <h2>Spécialise</h2>
                         <a href="terme.php?terme={{ terme.GEN_LIBELLE }}">{{ terme.GEN_LIBELLE }}</a>
                     {% endif %}
 
                     {% if specialisations != false %}
-                        <h3>Est spécialisé par les descripteurs suivants : </h3>
+                        <h2>Généralise</h2>
                             {% for spe in specialisations %}
                                 <a href="terme.php?terme={{ spe.LIBELLE }}">{{ spe.LIBELLE }}</a>
                             {% endfor %}
                     {% endif %}
 
                     {% if synonymes != false %}
-                        <h3>Liste de descripteurs synonymes : </h3>
+                        <h2>Synonymes</h2>
                             {% for syno in synonymes %}
                                 <a href="terme.php?terme={{ terme.LIBELLE }}">{{ syno.LIBELLE }}</a>
                             {% endfor %}
                     {% endif %}
-
-                    {#
-                    {{ dump(terme) }}
-                    {{ dump(specialisations) }}
-                    {{ dump(synonymes) }}
-                    #}
                 {% else %}
                     <div class="page-header">
                         <div class="alert alert-danger">Le terme n'existe pas.</div>

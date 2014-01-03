@@ -4,28 +4,24 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="page-header">
                     <h1>Liste des termes</h1>
                 </div>
 
-                {% for concept in concepts %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading concept">
-                            <i class="glyphicon glyphicon-chevron-right"></i> {{concept.nom}}
-                            <span class="badge">{{concept.termes|length}}</span>
-                            <a href="#{{concept.link}}">Edit</a>
-                        </div>
-                        <ul class="list-group terme">
-                            {% for terme in concept.termes %}
-                                <li class="list-group-item">{{terme.nom}}
-                                    <a href="#{{terme.link}}">Edit</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                {% for terme in termes %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            <a href="terme.php?terme={{ terme.LIBELLE }}">{{ terme.LIBELLE }}</a>
+                            {% if SESSION['email'] is defined %}
+                                <a href="terme_modif.php?terme={{ terme.LIBELLE }}">
+                                    <i class="glyphicon glyphicon-wrench"></i>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
                 {% endfor %}
-
             </div>
         </div>
     </div>

@@ -1,0 +1,56 @@
+{% extends "layout.twig" %}
+
+{% block title %}Ajouter un terme{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="page-header">
+                    <h1>Ajouter un terme</h1>
+                </div>
+                {% if SESSION['email'] is not defined %}
+                    <div class="alert alert-danger">Vous devez être connecté pour pouvoir ajouter un terme au thesaurus.</div>
+                {% else %}
+                    {% if error is not null %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% elseif success is not null %}
+                        <div class="alert alert-success">{{ success }}</div>
+                    {% endif %}
+                    <form role="terme_ajout" method="POST" action="terme_ajout.php">
+                        <div class="form-group">
+                            <label for="terme_nom">Nom du terme</label>
+                            <input type="text" class="form-control" id="terme_nom" name="terme_nom"
+                                   placeholder="Entrez le nom du terme" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="terme_definition">Définition</label>
+                            <input type="text" class="form-control" id="terme_definition" name="terme_definition"
+                                   placeholder="Entrez sa définition" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="terme_generalisation">Selectionnez un terme qui le généralise (optionnel)</label>
+                            <select class="form-control" name="terme_generalisation" id="terme_generalisation">
+                                <option value="null">Aucun</option>
+                                {% for terme in termes %}
+                                 <option value="{{ terme.LIBELLE }}">{{ terme.LIBELLE }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Selectionnez un/des terme(s) qui le spécialise (optionnel)</label>
+                            {% for terme in termes %}
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="terme_specialisation[]" value="{{ terme.LIBELLE }}" />                                                     {{ terme.LIBELLE }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Ajouter</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

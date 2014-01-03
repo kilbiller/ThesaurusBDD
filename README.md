@@ -6,14 +6,17 @@ Projet de master 1 en Base de donnée avancée qui consiste a créer un Thesauru
 TODO
 ------------
 
-- Liste des termes
-- Creation des termes
 - Mise a jour des termes
-- Recherche par terme / synonymes
+- Recherche par synonymes
 - Amélioré la base (contraintes et champs manquants)
 - Peupler la base
 - Mise a jour utilisateur
 - Ajouter autocompletion pour la recherche
+
+BUG
+------------
+
+- L'arbre de généralisation/spécialisation peut créer un cycle ...
 
 Installation
 ------------
