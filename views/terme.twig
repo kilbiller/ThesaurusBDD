@@ -26,6 +26,7 @@
                         <h2>Généralise</h2>
                             {% for spe in specialisations %}
                                 <a href="terme.php?terme={{ spe.LIBELLE }}">{{ spe.LIBELLE }}</a>
+                                {% if loop.last != true %}, {% endif %}
                             {% endfor %}
                     {% endif %}
 
@@ -33,6 +34,7 @@
                         <h2>Synonymes</h2>
                             {% for syno in synonymes %}
                                 <a href="terme.php?terme={{ terme.LIBELLE }}">{{ syno.LIBELLE }}</a>
+                                {% if loop.last != true %}, {% endif %}
                             {% endfor %}
                     {% endif %}
                 {% else %}
