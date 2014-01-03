@@ -28,7 +28,7 @@
                                    placeholder="Entrez sa définition" required>
                         </div>
                         <div class="form-group">
-                            <label for="terme_generalisation">Selectionnez un terme qui le généralise (optionnel)</label>
+                            <label for="terme_generalisation">Selectionnez un autre terme qui généralise ce terme (optionnel)</label>
                             <select class="form-control" name="terme_generalisation" id="terme_generalisation">
                                 <option value="null">Aucun</option>
                                 {% for terme in termes %}
@@ -37,7 +37,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Selectionnez un/des terme(s) qui le spécialise (optionnel)</label>
+                            <label>Selectionnez un/des autre(s) terme(s) qui spécialisent ce terme (optionnel)</label>
                             {% for terme in termes %}
                                 <div class="checkbox">
                                     <label>
@@ -46,8 +46,15 @@
                                 </div>
                             {% endfor %}
                         </div>
+                        <div class="form-group">
+                            <label>Ajoutez un/des synonyme(s) (optionnel)</label>
+                            <div id="synonymes">
+                                <input type="text" class="form-control" name="terme_synonyme[]" placeholder="Entrez un synonyme">
+                            </div>
+                            <input type="button" id="add" class="btn btn-default" value="Ajouter un synonyme"/>
+                        </div>
 
-                        <button type="submit" class="btn btn-default">Ajouter</button>
+                        <button type="submit" class="btn btn-default">Ajouter le terme</button>
                     </form>
                 {% endif %}
             </div>

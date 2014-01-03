@@ -9,3 +9,8 @@ $(".rectractable").click(function () {
     }
     $(this).next().toggle("fast");
 });
+
+
+$("#add").click(function() {
+    $("#synonymes").append('<input type="text" class="form-control" name="terme_synonyme[]" placeholder="Entrez un synonyme">');
+});

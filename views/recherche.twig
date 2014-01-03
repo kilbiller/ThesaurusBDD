@@ -7,11 +7,12 @@
             <div class="col-md-8">
                 <div class="page-header">
                     <h1>Résultat de la recherche</h1>
-                    <h2>{{ termes|length }} résultats correspondants à la recherche.</h2>
+                    <h2>{{ termes|length + synonymes|length }} résultats correspondants à la recherche.</h2>
                 </div>
-                {% if termes|length == 0 %}
+                {% if termes|length == 0 and synonymes|length == 0%}
                     <div class="alert alert-danger">Auncun résulat ne correspond à votre recherche.</div>
                 {% endif %}
+                {% if termes|length > 0 %} <h3>Termes</h3> {% endif %}
                 {% for terme in termes %}
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -19,6 +20,22 @@
                             <a href="terme.php?terme={{ terme.LIBELLE }}">{{ terme.LIBELLE }}</a>
                             {% if SESSION['email'] is defined %}
                                 <a href="terme_modif.php?terme={{ terme.LIBELLE }}">
+                                    <i class="glyphicon glyphicon-wrench"></i>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% endfor %}
+
+                {% if synonymes|length > 0 %} <h3>Synonymes</h3> {% endif %}
+                {% for syno in synonymes %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            <a href="terme.php?terme={{ syno.LIBELLE }}">{{ syno.SYNONYME }}</a>
+                            synonyme de {{ syno.LIBELLE }}
+                            {% if SESSION['email'] is defined %}
+                                <a href="terme_modif.php?terme={{ syno.LIBELLE }}">
                                     <i class="glyphicon glyphicon-wrench"></i>
                                 </a>
                             {% endif %}

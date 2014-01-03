@@ -102,11 +102,54 @@
                          //Ajoute en tant que généralisation des spécialisations
                         $stmt = $db->prepare('  UPDATE descripteurVedette
                                                 SET descripteurGen = (  SELECT ref(d)
-                                                                    FROM descripteurVedette d
-                                                                    WHERE d.libelle = :nom)
+                                                                        FROM descripteurVedette d
+                                                                        WHERE d.libelle = :nom)
                                                 WHERE libelle = :specialisation');
                         $stmt->execute(array(':nom' => $_POST['terme_nom'],
                                              ':specialisation' => $spe));
+                    }
+                }
+            }
+
+            //Ajoute les synonymes (si présents)
+            if(isset($_POST['terme_synonyme']))
+            {
+                foreach($_POST['terme_synonyme'] as $syno)
+                {
+                    if(!empty($syno))
+                    {
+                        //Cherche si le synonyme est déja dans la liste
+                        $stmt = $db->prepare('  SELECT COUNT(syno.COLUMN_VALUE) AS "nb"
+                                                FROM descripteurVedette d, TABLE(d.synonymes) syno
+                                                WHERE d.libelle = :nom AND UPPER(syno.COLUMN_VALUE) = UPPER(:synonyme)');
+                        $stmt->execute(array(':nom' => $_POST['terme_nom'], ':synonyme' => $syno));
+                        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        if($res['nb'] == 0)
+                        {
+                            //Cherche si synonymes est initialisé ou pas
+                            $stmt = $db->prepare('  SELECT COUNT(syno.COLUMN_VALUE) AS "nb"
+                                                    FROM descripteurVedette d, TABLE(d.synonymes) syno
+                                                    WHERE d.libelle = :nom');
+                            $stmt->execute(array(':nom' => $_POST['terme_nom']));
+                            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            //Si le nested table n'est pas encore initialisé la requête change
+                            if($res['nb'] == 0)
+                            {
+                                $stmt = $db->prepare('  UPDATE descripteurVedette
+                                                        SET synonymes = synoList(:synonyme)
+                                                        WHERE libelle = :nom');
+                            }
+                            else
+                            {
+                                $stmt = $db->prepare('  INSERT INTO TABLE(  SELECT synonymes
+                                                                            FROM descripteurVedette
+                                                                            WHERE libelle = :nom)
+                                                        VALUES (:synonyme)');
+                            }
+                            $stmt->execute(array(':nom' => $_POST['terme_nom'], ':synonyme' => $syno));
+                        }
                     }
                 }
             }
