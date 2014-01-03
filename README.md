@@ -6,11 +6,14 @@ Projet de master 1 en Base de donnée avancée qui consiste a créer un Thesauru
 TODO
 ------------
 
+- Liste des termes
+- Creation des termes
+- Mise a jour des termes
+- Recherche par terme / synonymes
+- Amélioré la base (contraintes et champs manquants)
+- Peupler la base
+- Mise a jour utilisateur
 - Ajouter autocompletion pour la recherche
-- Creer login session
-- Creer page qui decrit le terme + specialisation + blablabla
-- Rendre la page moins vide ?
-- connecté en tant que "lien vers la page de profil"
 
 Installation
 ------------
