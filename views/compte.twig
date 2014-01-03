@@ -8,37 +8,48 @@
                 <div class="page-header">
                     <h1>Mon compte</h1>
                 </div>
-                <form role="unsubscribe" method="POST" action="">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default">Se désinscrire</button>
-                    </div>
-                </form>
-                <form role="registration" method="POST" action="">
-                    <div class="form-group">
-                        <label for="visitor_firstname">Nom</label>
-                        <input type="text" class="form-control" id="visitor_firstname" value="Peru">
-                        <!-- value à remplir automatiquement avec la base -->
-                    </div>
-                    <div class="form-group">
-                        <label for="visitor_lastname">Prénom</label>
-                        <input type="text" class="form-control" id="visitor_lastname" value="Rémy">
-                        <!-- value à remplir automatiquement avec la base -->
-                    </div>
-                    <div class="form-group">
-                        <label for="visitor_email">Adresse Email</label>
-                        <input type="email" class="form-control" id="visitor_email" value="Entrez votre adresse email">
-                        <!-- value à remplir automatiquement avec la base -->
-                    </div>
-                    <div class="form-group">
-                        <label for="visitor_password1">Mot de passe</label>
-                        <input type="password" class="form-control" id="visitor_password1" placeholder="Entrez un mot de passe">
-                    </div>
-                    <div class="form-group">
-                        <label for="visitor_password2">Confirmation du mot de passe</label>
-                        <input type="password" class="form-control" id="visitor_password2" placeholder="Confirmez le mot de passe">
-                    </div>
-                    <button type="submit" class="btn btn-default">Changer mes informations</button>
-                </form>
+                {% if SESSION['email'] is not defined %}
+                    <div class="alert alert-danger">Vous devez être connecté pour pouvoir modifier votre profil.</div>
+                {% else %}
+                    {% if error is not null %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% elseif success is not null %}
+                        <div class="alert alert-success">{{ success }}</div>
+                    {% endif %}
+                    <form role="compte" method="POST" action="compte.php">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">Se désinscrire</button>
+                        </div>
+                    </form>
+                    <form role="registration" method="POST" action="">
+                        <div class="form-group">
+                            <label for="visitor_firstname">Prénom</label>
+                            <input type="text" class="form-control" id="visitor_firstname"
+                                   name="prenom" placeholder="{{ user.PRENOM }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="visitor_lastname">Nom</label>
+                            <input type="text" class="form-control" id="visitor_lastname"
+                                   name="nom" placeholder="{{ user.NOM }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="visitor_email">Adresse Email</label>
+                            <input type="email" class="form-control" id="visitor_email"
+                                   name="email" placeholder="{{ user.EMAIL }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="visitor_password1">Mot de passe</label>
+                            <input type="password" class="form-control" id="visitor_password1"
+                                   name="password1" placeholder="Entrez un mot de passe">
+                        </div>
+                        <div class="form-group">
+                            <label for="visitor_password2">Confirmation du mot de passe</label>
+                            <input type="password" class="form-control" id="visitor_password2"
+                                   name="password2" placeholder="Confirmez le mot de passe">
+                        </div>
+                        <button type="submit" class="btn btn-default">Changer mes informations</button>
+                    </form>
+                {% endif %}
             </div>
         </div>
     </div><!-- /.container -->
