@@ -5,25 +5,41 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <div class="page-header">
-                    <h1>Nom du terme</h1>
-                </div>
+                {% if terme != false %}
+                    <div class="page-header">
+                        <h1>{{terme.LIBELLE}}</h1>
+                    </div>
 
-                <h2>Définition : </h2>
-                <h3>Est généralisé le descripteur suivant : </h3>
-                <h3>Est spécialisé par les descripteurs suivants : </h3>
-                <h3>Liste de descripteurs synonymes : </h3>
+                    <h2>Définition :</h2>
+                        {{terme.DEFINITION}}
+                    {% if terme.GEN_LIBELLE != null %}
+                        <h3>Est généralisé le descripteur suivant :</h3>
+                        <a href="terme.php?terme={{ terme.GEN_LIBELLE }}">{{ terme.GEN_LIBELLE }}</a>
+                    {% endif %}
 
-                {% for t in test %}
-                    {{t.EMAIL}}
-                {% endfor %}
+                    {% if specialisations != false %}
+                        <h3>Est spécialisé par les descripteurs suivants : </h3>
+                            {% for spe in specialisations %}
+                                <a href="terme.php?terme={{ spe.LIBELLE }}">{{ spe.LIBELLE }}</a>
+                            {% endfor %}
+                    {% endif %}
 
-                {{dump(test)}}
+                    {% if synonymes != false %}
+                        <h3>Liste de descripteurs synonymes : </h3>
+                            {% for syno in synonymes %}
+                                <a href="terme.php?terme={{ terme.LIBELLE }}">{{ syno.LIBELLE }}</a>
+                            {% endfor %}
+                    {% endif %}
 
-                {{ app.request.query.get("lol") }}
-                {{ GET["lol"] }}
-                {% if GET['lol'] is defined %}
-                    {{ GET["lol"] }}
+                    {#
+                    {{ dump(terme) }}
+                    {{ dump(specialisations) }}
+                    {{ dump(synonymes) }}
+                    #}
+                {% else %}
+                    <div class="page-header">
+                        <div class="alert alert-danger">Le terme n'existe pas.</div>
+                    </div>
                 {% endif %}
 
 
