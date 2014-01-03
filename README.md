@@ -7,11 +7,7 @@ TODO
 ------------
 
 - Mise a jour des termes
-- Recherche par synonymes
-- Amélioré la base (contraintes et champs manquants)
 - Peupler la base
-- Mise a jour utilisateur
-- Ajouter autocompletion pour la recherche
 
 BUG
 ------------
