@@ -37,7 +37,7 @@
     }
 
     if(isset($_SESSION['email']))
-        header("location: index.php" ) ; // On renvoie ensuite sur la page d'accueil
+        header("location: index.php" ); // On renvoie ensuite sur la page d'accueil
     else
         echo $twig->render('inscription.twig', array('page' => 'inscription','error' => $error, 'success' => $success));
 
