@@ -1,0 +1,103 @@
+{% extends "layout.twig" %}
+
+{% block title %}Modifier le terme{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="page-header">
+                    <h1>Modifier {{ terme.LIBELLE }}</h1>
+                    <form method="POST">
+                        <button name="terme_suppr" value="{{ terme.LIBELLE }}" type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove"></span> Supprimer le terme
+                        </button>
+                    </form>
+                </div>
+                {% if SESSION['email'] is not defined %}
+                    <div class="alert alert-danger">Vous devez être connecté pour pouvoir modifier un terme.</div>
+                {% elseif terme == false %}
+                    <div class="alert alert-danger">Le terme n'existe pas.</div>
+                {% else %}
+                    {% if error is not null %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% elseif success is not null %}
+                        <div class="alert alert-success">{{ success }}</div>
+                    {% endif %}
+
+                    <form method="POST">
+                        <div class="input-group">
+                            <span class="input-group-addon">Définition</span>
+                            <input type="text" class="form-control" name="terme_definition" placeholder="{{ terme.DEFINITION }}" required>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">Modifier</button>
+                            </span>
+                        </div>
+                    </form>
+                    <br>
+                    <form method="POST">
+                        <div class="input-group">
+                            <span class="input-group-addon">Spécialise le terme</span>
+                            <select class="form-control" name="terme_generalisation">
+                                <option value="null">Aucun</option>
+                                {% for t in termes %}
+                                    <option {% if terme.GEN_LIBELLE == t.LIBELLE %} selected="selected" {% endif%}
+                                            value="{{ t.LIBELLE }}">{{ t.LIBELLE }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="input-group-btn">
+                                <button value="{{ terme.GEN_LIBELLE }}" type="submit" class="btn btn-default">Modifier</button>
+                            </span>
+                        </div>
+                    </form>
+
+                    <h3>Généralise les termes</h3>
+                    {% for spe in specialisations %}
+                        <form method="POST">
+                            <a href="terme.php?terme={{ spe.LIBELLE }}">{{ spe.LIBELLE }}</a>
+                            <button name="spe_suppr" value="{{ spe.LIBELLE }}"
+                                    type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </form>
+                    {% endfor %}
+                    <br>
+                    <form method="POST">
+                        <div class="input-group">
+                            <select class="form-control" name="terme_specialisation">
+                                {% for t in termes %}
+                                    {% if terme.GEN_LIBELLE != t.LIBELLE %}
+                                        <option value="{{ t.LIBELLE }}">{{ t.LIBELLE }}</option>
+                                    {% endif%}
+                                {% endfor %}
+                            </select>
+                            <span class="input-group-btn">
+                                <button value="{{ terme.GEN_LIBELLE }}" type="submit" class="btn btn-default">Ajouter</button>
+                            </span>
+                        </div>
+                    </form>
+
+                    <h3>Synonymes</h3>
+                    {% for syno in synonymes %}
+                        <form method="POST">
+                            <a href="terme.php?terme={{ terme.LIBELLE }}">{{ syno.LIBELLE }}</a>
+                            <button name="syno_suppr" value="{{ syno.LIBELLE }}"
+                                    type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </form>
+                    {% endfor %}
+                    <br>
+                    <form method="POST">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="terme_synonyme" placeholder="Ajouter un synonyme" required>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">Ajouter</button>
+                            </span>
+                        </div>
+                    </form>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

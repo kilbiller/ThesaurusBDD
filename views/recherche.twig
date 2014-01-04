@@ -33,7 +33,7 @@
                         <li class="list-group-item">
                             <i class="glyphicon glyphicon-chevron-right"></i>
                             <a href="terme.php?terme={{ syno.LIBELLE }}">{{ syno.SYNONYME }}</a>
-                            synonyme de {{ syno.LIBELLE }}
+                            synonyme de <a href="terme.php?terme={{ syno.LIBELLE }}">{{ syno.LIBELLE }}</a>
                             {% if SESSION['email'] is defined %}
                                 <a href="terme_modif.php?terme={{ syno.LIBELLE }}">
                                     <i class="glyphicon glyphicon-wrench"></i>

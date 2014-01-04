@@ -1,13 +1,6 @@
 <?php
     require_once 'loader.php';
 
-    //Liste de termes pour généralisation
-    $stmt = $db->prepare(   'SELECT d.libelle
-                            FROM descripteurVedette d
-                            ORDER BY d.libelle');
-    $stmt->execute();
-    $termes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     $error = null;
     $success = null;
     if(isset($_POST['terme_nom']) && isset($_POST['terme_definition']))
@@ -29,7 +22,7 @@
                                  ':definition' => $_POST['terme_definition'],
                                  ':email' => $_SESSION['email']));
 
-            //Ajoute terme qui généralise (si présent)
+            //Ajoute le terme qui généralise (si présent)
             if(isset($_POST['terme_generalisation']) && $_POST['terme_generalisation'] != "null")
             {
                 $stmt = $db->prepare('  UPDATE descripteurVedette
@@ -157,6 +150,13 @@
             $success = "Le terme a été ajouté avec succès au thesaurus.";
         }
     }
+
+    //Liste de termes pour généralisation
+    $stmt = $db->prepare(   'SELECT d.libelle
+                            FROM descripteurVedette d
+                            ORDER BY d.libelle');
+    $stmt->execute();
+    $termes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo $twig->render('terme_ajout.twig', array('page' => 'terme_ajout',
                                                  'error' => $error,

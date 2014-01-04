@@ -18,24 +18,24 @@
                     <h2>Définition</h2>
                         {{terme.DEFINITION}}
                     {% if terme.GEN_LIBELLE != null %}
-                        <h2>Spécialise</h2>
+                        <h2>Spécialise le terme</h2>
                         <a href="terme.php?terme={{ terme.GEN_LIBELLE }}">{{ terme.GEN_LIBELLE }}</a>
                     {% endif %}
 
                     {% if specialisations != false %}
-                        <h2>Généralise</h2>
-                            {% for spe in specialisations %}
-                                <a href="terme.php?terme={{ spe.LIBELLE }}">{{ spe.LIBELLE }}</a>
-                                {% if loop.last != true %}, {% endif %}
-                            {% endfor %}
+                        <h2>Généralise les termes</h2>
+                        {% for spe in specialisations %}
+                            <a href="terme.php?terme={{ spe.LIBELLE }}">{{ spe.LIBELLE }}</a>
+                            {% if loop.last != true %}, {% endif %}
+                        {% endfor %}
                     {% endif %}
 
                     {% if synonymes != false %}
                         <h2>Synonymes</h2>
-                            {% for syno in synonymes %}
-                                <a href="terme.php?terme={{ terme.LIBELLE }}">{{ syno.LIBELLE }}</a>
-                                {% if loop.last != true %}, {% endif %}
-                            {% endfor %}
+                        {% for syno in synonymes %}
+                            <a href="terme.php?terme={{ terme.LIBELLE }}">{{ syno.LIBELLE }}</a>
+                            {% if loop.last != true %}, {% endif %}
+                        {% endfor %}
                     {% endif %}
                 {% else %}
                     <div class="page-header">

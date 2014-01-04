@@ -6,7 +6,6 @@ Projet de master 1 en Base de donnée avancée qui consiste a créer un Thesauru
 TODO
 ------------
 
-- Mise a jour des termes
 - Peupler la base
 
 BUG
